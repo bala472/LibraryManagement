@@ -1,11 +1,14 @@
 package com.mbala.librarymanagement.managebook;
 
+import com.mbala.librarymanagement.model.Book;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class ManageBookView {
     private ManageBookModel manageBookModel;
    public ManageBookView() {
-          this.manageBookModel = new ManageBookModel(this);
+       manageBookModel = new ManageBookModel(this);
     }
     public void init() {
         Scanner in = new Scanner(System.in);
@@ -27,7 +30,6 @@ public class ManageBookView {
         System.out.println("Enter volume : ");
         int volume = in.nextInt();
         manageBookModel.bookSetup(name,id,author,publication,edition,journer,count,volume);
-       // doYouWantToAddMoreBook();
     }
     public void doYouWantToAddMoreBook(){
         Scanner in = new Scanner(System.in);
@@ -35,8 +37,25 @@ public class ManageBookView {
         int nextStep = in.nextInt();
         if (nextStep == 1) {
             init();
+        } else if (nextStep==2) {
+           manageBookModel.viewBook();
         } else {
             System.out.println("Please enter valid input");
+            doYouWantToAddMoreBook();
+        }
+    }
+
+    public void showSucess( ){
+        System.out.println("Book added successfully");
+    }
+    public void showAlreadyAdded(){
+        System.out.println("Book already added");
+    }
+
+    public void showBook(List<Book> bookList) {
+        System.out.printf("%-15s %-15s%n", "Book Name", "Book Id");
+        for (Book book : bookList) {
+            System.out.printf("%-15s %-15s%n", book.getName(), book.getId());
         }
     }
 
