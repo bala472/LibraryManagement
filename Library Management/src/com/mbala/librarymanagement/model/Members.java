@@ -3,7 +3,7 @@ package com.mbala.librarymanagement.model;
 public class Members {
     private String name;
    private int id;
-    private String emailId;
+   private String emailId;
    private String phoneNo;
    private String address;
   public void setName(String name){
@@ -31,7 +31,7 @@ public class Members {
        return phoneNo;
    }
    public void setEmail(String email){
-      this.emailId=emailId;
+      this.emailId=email;
    }
    public String getEmail(){
        return emailId;

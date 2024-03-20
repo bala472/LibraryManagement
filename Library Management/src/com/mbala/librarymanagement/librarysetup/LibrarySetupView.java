@@ -20,10 +20,10 @@ public class LibrarySetupView {
         int id =in.nextInt();
         library.setLibraryId(id);
         System.out.println("Enter Phone Number : ");
-        String phoneNo = in.next();
+        in.nextLine();
+        String phoneNo = in.nextLine();
         library.setPhoneNo(phoneNo);
         System.out.println("Enter Emailid : ");
-        in.next();
         String emailid= in.nextLine();
         library.setEmailId(emailid);
         System.out.println("Enter Address : ");

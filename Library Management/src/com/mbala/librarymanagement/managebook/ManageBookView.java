@@ -26,15 +26,15 @@ public class ManageBookView {
         String name = in.nextLine();
         System.out.println("Enter id : ");
         int id = in.nextInt();
-        in.nextLine();
         System.out.println("Enter Author : ");
+        in.nextLine();
         String author = in.nextLine();
         System.out.println("Enter Publication : ");
         String publication = in.nextLine();
         System.out.println("Enter edition : ");
         int edition = in.nextInt();
         System.out.println("Enter journer : ");
-        in.next();
+        in.nextLine();
         String journer = in.nextLine();
         System.out.println("Enter available count : ");
         int count = in.nextInt();
@@ -73,10 +73,6 @@ public class ManageBookView {
         }
     }
 
-    /*public void showSearchedBooks(String name , int id, String author,String publication,String journal,int edition,int volume){
-        System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s %-15s \n","Book Name","Book Id","Author","Publication","Journal","Edition","Volume");
-        System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s %-15s \n",name,id,author,publication,journal,edition,volume);
-    }*/
     public void showSearchedBooks(String name, int id, String author, String publication, String journal, int edition, int volume) {
         System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s %-15s\n", "Book Name", "Book Id", "Author", "Publication", "Journal", "Edition", "Volume");
         System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s %-15s\n", name, id, author, publication, journal, Integer.toString(edition), Integer.toString(volume));
@@ -92,11 +88,8 @@ public class ManageBookView {
     }
 
     public void showBook(List<Book> bookList) {
-        //System.out.printf("%-15s %-15s%n", "Book Name", "Book Id");
         System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s %-15s\n", "Book Name", "Book Id", "Author", "Publication", "Journal", "Edition", "Volume");
-
         for (Book book : bookList) {
-            //System.out.printf("%-15s %-15s%n", book.getName(), book.getId());
             System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s %-15s\n", book.getName(), book.getId(), book.getAuthor(), book.getPublication(), book.getJourner(), book.getEdition(), book.getVolume());
         }
         mainMenu();

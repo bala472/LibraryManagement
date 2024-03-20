@@ -19,7 +19,7 @@ public class MemberView {
         System.out.println("Enter Member's Id : ");
         members.setId(in.nextInt());
         System.out.println("Enter email address : ");
-        in.next();
+        in.nextLine();
         members.setEmail(in.nextLine());
         System.out.println("Enter phone number : ");
         members.setPhoneNo(in.nextLine());
@@ -28,15 +28,15 @@ public class MemberView {
         memberModel.addMemberList(members);
     }
     public void onSucess(){
-        System.out.println("Member added sucesfully ");
-
+        System.out.println("Member added successfully ");
     }
     public void alreadyExsists(){
         System.out.println("Member already added");
     }
     public void showMembers(){
+        System.out.printf("%-15s %-15s %-15s %-15s %-15s\n","Name","Member ID","Phone Number","Email","Address");
       for(Members members: DataLayer.getInstance().getMemberList()){
-          System.out.println(members.getName()+" "+members.getId()+" "+members.getPhoneNo()+" "+members.getAddress());
+          System.out.printf("%-15s %-15s %-15s %-15s %-15s\n",members.getName(),members.getId(),members.getPhoneNo(),members.getEmail(),members.getAddress());
       }
     }
     public void removeMember(){
@@ -45,6 +45,6 @@ public class MemberView {
         memberModel.removeMember(in.nextInt());
     }
     public void onSucessRemove(){
-        System.out.println("Member removed sucesfully. If given id does not exsist then none of the member is removed");
+        System.out.println("Member removed successfully. If given id does not exists then none of the member is removed");
     }
 }
