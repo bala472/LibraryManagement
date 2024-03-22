@@ -1,6 +1,7 @@
 package com.mbala.librarymanagement.datalayer;
 
 import com.mbala.librarymanagement.model.Book;
+import com.mbala.librarymanagement.model.Library;
 import com.mbala.librarymanagement.model.Members;
 
 
@@ -11,6 +12,13 @@ public class DataLayer {
     private static DataLayer dataLayer;
     private List<Book> bookList= new ArrayList<>();
     private List<Members> memberList = new ArrayList<>();
+    private List<Library> librarySetup = new ArrayList<>();
+    public List<Library> getLibrarySetup(){
+        return librarySetup;
+    }
+    public void setLibrarySetup(Library libraryDetails){
+        librarySetup.add(libraryDetails);
+    }
     public static DataLayer getInstance(){
         if(dataLayer==null){
             dataLayer= new DataLayer();
@@ -67,5 +75,6 @@ public class DataLayer {
             }
         }
     }
+
 
 }

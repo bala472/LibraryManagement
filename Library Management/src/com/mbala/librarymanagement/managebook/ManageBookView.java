@@ -67,6 +67,7 @@ public class ManageBookView {
             mainMenu();
         } else if (nextStep==7) {
             System.out.println("Logged out successfully");
+            
         } else {
             System.out.println("Please enter valid input");
             mainMenu();

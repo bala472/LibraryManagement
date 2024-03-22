@@ -5,13 +5,23 @@ import  com.mbala.librarymanagement.model.Library;
 import java.util.Scanner;
 
 public class LibrarySetupView {
-    private Library library = new Library();
+    private Library library; 
     private LibrarySetupModel librarySetupModel;
     public LibrarySetupView() {
         librarySetupModel = new LibrarySetupModel(this);
     }
     public void init() {
        librarySetupModel.startSetup();
+    }
+    public void onSetupComplete() {
+        new ManageBookView().mainMenu();
+    }
+   /* public void showAlert(String alert) {
+        System.out.println("\nPrint any errors here.\n");
+    }*/
+    public void initiateSetup() {
+        this.library=new Library();
+        System.out.println("\nPlease Fill Library Details From Here.\n\n");
         Scanner in = new Scanner(System.in);
         System.out.println("Enter Library Name : ");
         String name = in.nextLine();
@@ -29,16 +39,8 @@ public class LibrarySetupView {
         System.out.println("Enter Address : ");
         String address = in.nextLine();
         library.setAddress(address);
-        librarySetupModel.startSetup();
-    }
-    public void onSetupComplete() {
+        librarySetupModel.addLibraryList(library);
         System.out.println("\nLibrary setup completed successfully\n");
-        new ManageBookView().mainMenu();
-    }
-   /* public void showAlert(String alert) {
-        System.out.println("\nPrint any errors here.\n");
-    }*/
-    public void initiateSetup() {
-        System.out.println("\nPlease Fill Library Details From Here.\n");
+        librarySetupModel.startSetup();
     }
 }

@@ -6,6 +6,7 @@ public class Members {
    private String emailId;
    private String phoneNo;
    private String address;
+   
   public void setName(String name){
        this.name=name;
    }
