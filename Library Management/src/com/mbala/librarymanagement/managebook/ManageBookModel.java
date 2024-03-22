@@ -35,6 +35,6 @@ public class ManageBookModel {
     }
     public void searchBook(int id){
         Book bookNameList = DataLayer.getInstance().searchBookById(id);
-        manageBookView.showSearchedBooks(bookNameList.getName(),bookNameList.getId(),bookNameList.getAuthor(),bookNameList.getPublication(),bookNameList.getJourner(),bookNameList.getEdition(),bookNameList.getVolume());
+        manageBookView.showSearchedBooks(bookNameList.getName(),bookNameList.getId(),bookNameList.getAuthor(),bookNameList.getPublication(),bookNameList.getJourner(),bookNameList.getEdition(),bookNameList.getVolume(),bookNameList.getAvailableCount());
     }
 }

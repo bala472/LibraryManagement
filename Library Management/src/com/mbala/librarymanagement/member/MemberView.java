@@ -34,9 +34,9 @@ public class MemberView {
         System.out.println("Member already added");
     }
     public void showMembers(){
-        System.out.printf("%-15s %-15s %-15s %-15s %-15s\n","Name","Member ID","Phone Number","Email","Address");
+        System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s %-15s\n","Name","Member ID","Phone Number","Email","Address","Book Name","Book id");
       for(Members members: DataLayer.getInstance().getMemberList()){
-          System.out.printf("%-15s %-15s %-15s %-15s %-15s\n",members.getName(),members.getId(),members.getPhoneNo(),members.getEmail(),members.getAddress());
+          System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s %-15s\n",members.getName(),members.getId(),members.getPhoneNo(),members.getEmail(),members.getAddress(),members.getBookList(),members.getBookid());
       }
     }
     public void removeMember(){

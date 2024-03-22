@@ -1,6 +1,7 @@
 package com.mbala.librarymanagement.datalayer;
 
 import com.mbala.librarymanagement.model.Book;
+import com.mbala.librarymanagement.model.BorrowReturnBook;
 import com.mbala.librarymanagement.model.Library;
 import com.mbala.librarymanagement.model.Members;
 
@@ -13,6 +14,16 @@ public class DataLayer {
     private List<Book> bookList= new ArrayList<>();
     private List<Members> memberList = new ArrayList<>();
     private List<Library> librarySetup = new ArrayList<>();
+    private List<BorrowReturnBook> borrowBook = new ArrayList<>();
+
+    public List<BorrowReturnBook> getBorrowBookList(){
+        return borrowBook;
+    }
+
+    public void setBorrowBook(BorrowReturnBook borrowBook) {
+        this.borrowBook.add(borrowBook);
+    }
+
     public List<Library> getLibrarySetup(){
         return librarySetup;
     }
@@ -75,6 +86,5 @@ public class DataLayer {
             }
         }
     }
-
 
 }

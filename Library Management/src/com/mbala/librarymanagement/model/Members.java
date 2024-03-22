@@ -1,13 +1,29 @@
 package com.mbala.librarymanagement.model;
 
+import java.util.ArrayList;
+
 public class Members {
     private String name;
    private int id;
    private String emailId;
    private String phoneNo;
    private String address;
-   
-  public void setName(String name){
+   private ArrayList<String> bookList = new ArrayList<>();
+   private ArrayList<Integer> bookId = new ArrayList<>();
+
+    public ArrayList<String> getBookList() {
+        return bookList;
+    }
+    public ArrayList<Integer> getBookid(){
+        return bookId;
+    }
+
+    public void setBookList(String bookList,int bookId) {
+        this.bookList.add(bookList);
+        this.bookId.add(bookId);
+    }
+
+    public void setName(String name){
        this.name=name;
    }
    public String getName(){

@@ -13,9 +13,7 @@ public class LibrarySetupView {
     public void init() {
        librarySetupModel.startSetup();
     }
-    public void onSetupComplete() {
-        new ManageBookView().mainMenu();
-    }
+
    /* public void showAlert(String alert) {
         System.out.println("\nPrint any errors here.\n");
     }*/
@@ -42,5 +40,8 @@ public class LibrarySetupView {
         librarySetupModel.addLibraryList(library);
         System.out.println("\nLibrary setup completed successfully\n");
         librarySetupModel.startSetup();
+    }
+    public void onSetupComplete() {
+        new ManageBookView().mainMenu();
     }
 }

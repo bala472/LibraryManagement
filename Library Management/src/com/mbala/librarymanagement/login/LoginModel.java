@@ -32,10 +32,10 @@ class LoginModel {
             if (isValidPassword(password)) {
                 loginView.onSuccess();
             } else {
-                loginView.showAlert("Invalid password");
+                loginView.showAlert("\nInvalid password");
             }
         } else {
-            loginView.showAlert("Invalid User Name");
+            loginView.showAlert("\nInvalid User Name");
         }
     }
 

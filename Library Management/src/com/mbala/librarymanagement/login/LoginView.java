@@ -36,5 +36,6 @@ public class LoginView {
 
     public void showAlert(String alertText) {
         System.out.println(alertText);
+        init();
     }
 }
