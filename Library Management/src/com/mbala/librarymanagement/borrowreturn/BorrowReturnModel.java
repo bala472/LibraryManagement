@@ -25,6 +25,7 @@ public class BorrowReturnModel {
                         if(member.getBookList().size()<=3){
                             member.setBookList(book.getName(),book.getId());
                             DataLayer.getInstance().setBorrowBook(borrowReturnBook);
+                            //updated
                         }
                         else{
                             System.out.println("User already taken 3 books.Please return books to continue");
@@ -55,12 +56,12 @@ public class BorrowReturnModel {
                         if (bookId == book.getId()) {
                             book.setAvailableCount(book.getAvailableCount() + 1);
                             for(Members members: DataLayer.getInstance().getMemberList()){
-                                for(int i: members.getBookid())
-                                if(i==bookId){
+                               for(int i=0;i<members.getBookid().size();i++){
+                                if(members.getBookid().get(i)==bookId){
+                                    members.getBookid().remove(i);
                                     members.getBookList().remove(i);
-                                    members.getBookid().remove((Integer)i);
-                                   // members.setBookList(null,0);
                                 }
+                               }
                             }
                             //  borrowReturnBook.setBorrowedBooks(borrowReturnBook.getBorrowedBooks()-1);
                             break;
