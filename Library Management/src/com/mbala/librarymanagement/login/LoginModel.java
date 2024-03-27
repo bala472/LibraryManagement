@@ -1,5 +1,9 @@
 package com.mbala.librarymanagement.login;
 
+import com.mbala.librarymanagement.datalayer.DataLayer;
+
+import java.io.IOException;
+
 class LoginModel {
     /*public LoginView loginView;
         LoginModel(LoginView loginView){
@@ -27,9 +31,10 @@ class LoginModel {
         this.loginView = loginView;
     }
 
-    public void validateUser(String userName, String password) {
+    public void validateUser(String userName, String password)  {
         if (isValidUserName(userName)) {
             if (isValidPassword(password)) {
+                DataLayer.getInstance().loadBookListJson();
                 loginView.onSuccess();
             } else {
                 loginView.showAlert("\nInvalid password");
