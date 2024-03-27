@@ -9,7 +9,7 @@ public class ManageBookModel {
                 this.manageBookView = manageBookView;
                 this.book = new Book();
     }
-     void bookSetup(String name , int id ,
+    public void bookSetup(String name , int id ,
                            String author,String publication,int edition,
                            String journer,int count, int volume){
         this.book =new Book();
