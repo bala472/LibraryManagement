@@ -80,6 +80,8 @@ public class DataLayer {
             }
         }
         memberList.add(members);
+        new File("member.json").delete();
+        setMemberListJson(memberList);
         return true;
     }
 
@@ -91,49 +93,46 @@ public class DataLayer {
         for (Members members : memberList) {
             if (members.getId() == id) {
                 memberList.remove(members);
+                new File("member.json").delete();
+                setMemberListJson(memberList);
                 break;
             }
         }
     }
     //Object Mapper
     ObjectMapper mapper = new ObjectMapper();
-    File file = new File("C:\\Users\\zoho\\IdeaProjects\\Library Management\\data.json");
+    File file = new File("book.json");
     public void setBookListJson(List<Book> bookList) {
         try {
-         //   ObjectMapper mapper = new ObjectMapper();
-            String jsonData = mapper.writeValueAsString(bookList);
-            mapper.writeValue( new File("C:\\Users\\zoho\\IdeaProjects\\Library Management\\data.json"), jsonData);
+            mapper.writeValue( file, bookList);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     public void loadBookListJson() {
         try {
-          //  ObjectMapper mapper = new ObjectMapper();
-           // mapper.writeValue(new File("C:\\Users\\zoho\\IdeaProjects\\Library Management\\data.json"),);
-            List<Book> temp = mapper.readValue( new File("C:\\Users\\zoho\\IdeaProjects\\Library Management\\data.json"), new TypeReference<List<Book>>() {
+            List<Book> temp = mapper.readValue( file, new TypeReference<List<Book>>() {
             });
             bookList.addAll(temp);
         } catch (IOException e) {
             System.err.println("Error reading book list from JSON: " + e.getMessage());
         }
     }
-    public void setMemberListJson(ArrayList<Members> memberList) throws IOException {
+    public void setMemberListJson(List<Members> memberList)  {
         try {
-            String jsonData = mapper.writeValueAsString(memberList);
-            mapper.writeValue(file, jsonData);
-        } catch (JsonProcessingException e) {
+            mapper.writeValue(new File("member.json"), memberList);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public List<Members> getMemberListJson() throws IOException {
+    public void loadMemberListJson() {
         try {
-            return mapper.readValue(file, new TypeReference<List<Members>>() {
+             List<Members> temp =mapper.readValue(new File("member.json"), new TypeReference<List<Members>>() {
             });
-        } catch (JsonProcessingException e) {
+             memberList.addAll(temp);
+        } catch (IOException e) {
             e.printStackTrace();
-            return new ArrayList<>(); // Handle empty list or error
         }
     }
 
@@ -156,22 +155,21 @@ public class DataLayer {
         }
     }
 
-    public void setBorrowReturnBookListJson(ArrayList<BorrowReturnBook> borrowReturnBooksList) throws IOException {
+    public void setBorrowBookListJson(List<BorrowReturnBook> borrowBook){
         try {
-            String jsonData = mapper.writeValueAsString(borrowReturnBooksList);
-            mapper.writeValue(file, jsonData);
-        } catch (JsonProcessingException e) {
+            mapper.writeValue(new File("borrowBook.json"), borrowBook);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public List<BorrowReturnBook> getBorrowReturnBookListJson() throws IOException {
+    public void loadBorrowBookListJson()  {
+        if(new File("borrowBook.json").length()==0)
+            bookList.add(new Book());
         try {
-            return mapper.readValue(file, new TypeReference<List<BorrowReturnBook>>() {
-            });
-        } catch (JsonProcessingException e) {
+          borrowBook.addAll(mapper.readValue(new File("borrowBook.json"), new TypeReference<List<BorrowReturnBook>>() {}));
+        } catch (IOException e) {
             e.printStackTrace();
-            return new ArrayList<>(); // Handle empty list or error
         }
     }
 

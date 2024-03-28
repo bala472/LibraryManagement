@@ -24,11 +24,11 @@ public class LibrarySetupView {
         System.out.println("Enter Library Name : ");
         String name = in.nextLine();
         library.setLibraryName(name);
-        System.out.println("Enter Library Id : ");
+     /*   System.out.println("Enter Library Id : ");
         int id =in.nextInt();
-        library.setLibraryId(id);
+        library.setLibraryId(id);*/
         System.out.println("Enter Phone Number : ");
-        in.nextLine();
+       // in.nextLine();
         String phoneNo = in.nextLine();
         library.setPhoneNo(phoneNo);
         System.out.println("Enter Emailid : ");

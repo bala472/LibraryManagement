@@ -4,7 +4,7 @@ import com.mbala.librarymanagement.login.LoginView;
 public class LibraryManagement {
     private static  LibraryManagement libraryManagement;
     private String appName = "Library Management System";
-    private String appVersion = "1.0";
+    private String appVersion = "0.1.0";
     private LibraryManagement() {
     }
     public static LibraryManagement getInstance() {

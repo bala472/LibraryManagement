@@ -5,28 +5,9 @@ import com.mbala.librarymanagement.datalayer.DataLayer;
 import java.io.IOException;
 
 class LoginModel {
-    /*public LoginView loginView;
-        LoginModel(LoginView loginView){
-            this.loginView= loginView;
-        }
-    public String validateUser(String userName,String password){
-        if(validateUserName(userName)){
-            if(validatePassword(password)){
-                return "Logged in Successfully";
-            }else{
-                return "Invalid Password";
-            }
-        }
-            return "Invalid User Name";
-    }
-    private boolean validateUserName(String userName){
-            return userName.equals("bala472");
-    }
-    private boolean validatePassword(String password){
-        return password.equals("123456789");
-    }*/
-    private LoginView loginView;
 
+
+    private LoginView loginView;
     LoginModel(LoginView loginView) {
         this.loginView = loginView;
     }
@@ -34,7 +15,12 @@ class LoginModel {
     public void validateUser(String userName, String password)  {
         if (isValidUserName(userName)) {
             if (isValidPassword(password)) {
+                if(DataLayer.getInstance().getBookList().isEmpty())
                 DataLayer.getInstance().loadBookListJson();
+                if(DataLayer.getInstance().getMemberList().isEmpty())
+                DataLayer.getInstance().loadMemberListJson();
+                if(DataLayer.getInstance().getBorrowBookList().isEmpty())
+                    DataLayer.getInstance().loadBorrowBookListJson();
                 loginView.onSuccess();
             } else {
                 loginView.showAlert("\nInvalid password");
