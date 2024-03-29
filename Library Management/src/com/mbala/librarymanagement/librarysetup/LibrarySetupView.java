@@ -13,30 +13,21 @@ public class LibrarySetupView {
     public void init() {
        librarySetupModel.startSetup();
     }
-
-   /* public void showAlert(String alert) {
-        System.out.println("\nPrint any errors here.\n");
-    }*/
     public void initiateSetup() {
         this.library=new Library();
         System.out.println("\nPlease Fill Library Details From Here.\n\n");
         Scanner in = new Scanner(System.in);
         System.out.println("Enter Library Name : ");
-        String name = in.nextLine();
-        library.setLibraryName(name);
+        library.setLibraryName(in.nextLine());
      /*   System.out.println("Enter Library Id : ");
         int id =in.nextInt();
         library.setLibraryId(id);*/
         System.out.println("Enter Phone Number : ");
-       // in.nextLine();
-        String phoneNo = in.nextLine();
-        library.setPhoneNo(phoneNo);
+        library.setPhoneNo(in.nextLine());
         System.out.println("Enter Emailid : ");
-        String emailid= in.nextLine();
-        library.setEmailId(emailid);
+        library.setEmailId(in.nextLine());
         System.out.println("Enter Address : ");
-        String address = in.nextLine();
-        library.setAddress(address);
+        library.setAddress(in.nextLine());
         librarySetupModel.addLibraryList(library);
         System.out.println("\nLibrary setup completed successfully\n");
         librarySetupModel.startSetup();

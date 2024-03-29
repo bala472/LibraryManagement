@@ -10,14 +10,15 @@ public class LibrarySetupModel {
     }
     public void startSetup() {
         
-           if(DataLayer.getInstance().getLibrarySetup().size()==0) {
+           if(DataLayer.getInstance().getLibrarySetup()==null) {
             librarySetupView.initiateSetup();
            }
         else {
             librarySetupView.onSetupComplete();
         }
     }
-    public void addLibraryList(Library object){
-        DataLayer.getInstance().setLibrarySetup(object);
+    public void addLibraryList(Library library){
+        DataLayer.getInstance().setLibrarySetup(library);
+        DataLayer.getInstance().setLibraryJson(library);
     }
 }

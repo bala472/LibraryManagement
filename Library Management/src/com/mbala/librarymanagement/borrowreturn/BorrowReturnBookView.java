@@ -28,6 +28,8 @@ public class BorrowReturnBookView {
         if(flag==2){
         System.out.println("\nBook borrowed successfully ");
         }
+        if(flag==3)
+        System.out.println("User already taken 3 books.Please return books to continue");
         doYouWantContinue();
    }
    public void doYouWantContinue(){

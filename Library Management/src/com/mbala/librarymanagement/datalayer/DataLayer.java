@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mbala.librarymanagement.model.Book;
 import com.mbala.librarymanagement.model.BorrowReturnBook;
@@ -22,7 +23,7 @@ public class DataLayer {
     private static DataLayer dataLayer;
     private List<Book> bookList = new ArrayList<>();
     private List<Members> memberList = new ArrayList<>();
-    private List<Library> librarySetup = new ArrayList<>();
+    private Library librarySetup;
     private List<BorrowReturnBook> borrowBook = new ArrayList<>();
 
 
@@ -34,12 +35,12 @@ public class DataLayer {
         this.borrowBook.add(borrowBook);
     }
 
-    public List<Library> getLibrarySetup() {
+    public Library getLibrarySetup() {
         return librarySetup;
     }
 
     public void setLibrarySetup(Library libraryDetails) {
-        librarySetup.add(libraryDetails);
+        this.librarySetup=libraryDetails;
     }
 
     public static DataLayer getInstance() {
@@ -68,7 +69,7 @@ public class DataLayer {
             }
         }
         bookList.add(book);
-       file.delete();
+       new File("booklist.json").delete();
         setBookListJson(bookList);
         return true;
     }
@@ -80,7 +81,7 @@ public class DataLayer {
             }
         }
         memberList.add(members);
-        new File("member.json").delete();
+        new File("memberlist.json").delete();
         setMemberListJson(memberList);
         return true;
     }
@@ -93,84 +94,117 @@ public class DataLayer {
         for (Members members : memberList) {
             if (members.getId() == id) {
                 memberList.remove(members);
-                new File("member.json").delete();
+                new File("memberlist.json").delete();
                 setMemberListJson(memberList);
                 break;
             }
         }
     }
+
     //Object Mapper
+
+
     ObjectMapper mapper = new ObjectMapper();
-    File file = new File("book.json");
+
+
     public void setBookListJson(List<Book> bookList) {
         try {
-            mapper.writeValue( file, bookList);
+            mapper.writeValue(  new File("booklist.json"), bookList);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     public void loadBookListJson() {
-        try {
-            List<Book> temp = mapper.readValue( file, new TypeReference<List<Book>>() {
-            });
-            bookList.addAll(temp);
-        } catch (IOException e) {
-            System.err.println("Error reading book list from JSON: " + e.getMessage());
+        if(new File("booklist.json").exists() && new File("booklist.json").canRead()){
+            try {
+                bookList.addAll(mapper.readValue(  new File("booklist.json"), new TypeReference<List<Book>>() {}));
+            } catch (IOException e) {
+                System.err.println("Error reading book list from JSON: " + e.getMessage());
+            }
+    
+        }else{
+            try{
+                new File("booklist.json").createNewFile();
+            }catch(IOException e){
+                System.err.println("Error reading book list from JSON: " + e.getMessage());
+            }  
         }
-    }
+            }
     public void setMemberListJson(List<Members> memberList)  {
         try {
-            mapper.writeValue(new File("member.json"), memberList);
+            mapper.writeValue(new File("memberlist.json"), memberList);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void loadMemberListJson() {
+        if(new File("memberlist.json").exists() && new File("memberlist.json").canRead()){
+            try {
+                memberList.addAll( mapper.readValue(new File("memberlist.json"), new TypeReference<List<Members>>() {
+               }));
+           } catch (IOException e) {
+               e.printStackTrace();
+           }
+        }else{
+            try{
+                new File("memberlist.json").createNewFile();
+            }catch(IOException e){
+                System.err.println("Error reading book list from JSON: " + e.getMessage());
+            }
+           
+        }
+        
+    }
+
+   public void setLibraryJson(Library library){
         try {
-             List<Members> temp =mapper.readValue(new File("member.json"), new TypeReference<List<Members>>() {
-            });
-             memberList.addAll(temp);
+            mapper.writeValue(new File("library.json"), library);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void setLibraryListJson(ArrayList<Library> libraryList) throws IOException {
-        try {
-            String jsonData = mapper.writeValueAsString(libraryList);
-            mapper.writeValue(file, jsonData);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public List<Library> getLibraryListJson() throws IOException {
-        try {
-            return mapper.readValue(file, new TypeReference<List<Library>>() {
-            });
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            return new ArrayList<>(); // Handle empty list or error
+    public void loadLibraryJson() {
+        if(new File("library.json").exists() && new File("library.json").canRead()){
+            try {
+                librarySetup = mapper.readValue(new File("library.json"), new TypeReference<Library>() {});
+                 } catch (IOException e) {
+                     e.printStackTrace();
+                 }
+         
+        }else{
+            try{
+                new File("library.json").createNewFile();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
         }
     }
 
     public void setBorrowBookListJson(List<BorrowReturnBook> borrowBook){
         try {
-            mapper.writeValue(new File("borrowBook.json"), borrowBook);
+            mapper.writeValue(new File("borrowBooklist.json"), borrowBook);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void loadBorrowBookListJson()  {
-        if(new File("borrowBook.json").length()==0)
-            bookList.add(new Book());
-        try {
-          borrowBook.addAll(mapper.readValue(new File("borrowBook.json"), new TypeReference<List<BorrowReturnBook>>() {}));
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(new File("borrowBooklist.json").exists() && new File("borrowBooklist.json").canRead()){
+            try {
+                borrowBook.addAll(mapper.readValue(new File("borrowBooklist.json"), new TypeReference<List<BorrowReturnBook>>() {}));
+              } catch (IOException e) {
+                  e.printStackTrace();
+              }
+        }else{
+            try{
+                new File("borrowBooklist.json").createNewFile();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
         }
+       
     }
 
 }

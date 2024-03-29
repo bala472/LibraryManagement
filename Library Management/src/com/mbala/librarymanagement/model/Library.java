@@ -1,5 +1,8 @@
 package com.mbala.librarymanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Library {
     private static String libraryName;
     private static int libraryId;

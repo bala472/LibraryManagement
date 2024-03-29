@@ -21,6 +21,8 @@ class LoginModel {
                 DataLayer.getInstance().loadMemberListJson();
                 if(DataLayer.getInstance().getBorrowBookList().isEmpty())
                     DataLayer.getInstance().loadBorrowBookListJson();
+                if(DataLayer.getInstance().getLibrarySetup()==null)
+                DataLayer.getInstance().loadLibraryJson();
                 loginView.onSuccess();
             } else {
                 loginView.showAlert("\nInvalid password");

@@ -38,11 +38,8 @@ public class BorrowReturnModel {
 
                         }
                         else{
-                            System.out.println("User already taken 3 books.Please return books to continue");
+                            flag=3;
                         }
-
-                        //   borrowReturnBook.setBorrowedBooks(borrowReturnBook.getBorrowedBooks()+1);
-
                     }
                 }
             }
@@ -53,11 +50,15 @@ public class BorrowReturnModel {
             borrowReturnBookView.showAlert(1);
         if (flag == 2)
             borrowReturnBookView.showAlert(2);
+        if (flag ==3)
+            borrowReturnBookView.showAlert(3);
     }
 
     public void validateReturnBook(int userId, int bookId) {
         int flag = 0;
-        for (BorrowReturnBook borrowReturnBook : DataLayer.getInstance().getBorrowBookList()) {
+        int count =0;
+    L1:    for (BorrowReturnBook borrowReturnBook : DataLayer.getInstance().getBorrowBookList()) {
+           
             if (userId == borrowReturnBook.getUserId()) {
                 flag = 1;
                 if (bookId == borrowReturnBook.getBookId()) {
@@ -71,21 +72,22 @@ public class BorrowReturnModel {
                                     book.setAvailableCount(book.getAvailableCount() + 1);
                                     members.getBookid().remove(i);
                                     members.getBookList().remove(i);
+                                    DataLayer.getInstance().getBorrowBookList().remove(count);
                                     new File("book.json").delete();
                                     new File("member.json").delete();
                                     new File("borrowBook.json").delete();
                                     DataLayer.getInstance().setBookListJson(DataLayer.getInstance().getBookList());
                                     DataLayer.getInstance().setMemberListJson(DataLayer.getInstance().getMemberList());
                                     DataLayer.getInstance().setBorrowBookListJson(DataLayer.getInstance().getBorrowBookList());
+                                  break L1;
                                 }
                                }
                             }
-                            // borrowReturnBook.setBorrowedBooks(borrowReturnBook.getBorrowedBooks()-1);
-                            break;
                         }
                     }
                 }
             }
+            count++;
         }
         if (flag == 0)
             borrowReturnBookView.showAlertReturn(0);
