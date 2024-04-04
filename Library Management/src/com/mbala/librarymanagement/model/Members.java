@@ -1,5 +1,6 @@
 package com.mbala.librarymanagement.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Members {
@@ -8,8 +9,12 @@ public class Members {
    private String emailId;
    private String phoneNo;
    private String address;
-   private ArrayList<String> bookList = new ArrayList<>();
-   private ArrayList<Integer> bookId = new ArrayList<>();
+   private ArrayList<String> bookList = new ArrayList<>(3);
+   private ArrayList<Integer> bookId = new ArrayList<>(3);
+
+   private  ArrayList<String> issuedBookDate = new ArrayList<>(3);
+
+   private ArrayList<String> returnBookDate = new ArrayList<>(3);
 
     public ArrayList<String> getBookList() {
         return bookList;
@@ -18,9 +23,14 @@ public class Members {
         return bookId;
     }
 
+    public ArrayList<String> getIssuedBookDate(){return issuedBookDate;}
+    public ArrayList<String> getReturnBookDate(){return returnBookDate;}
+
     public void setBookList(String bookList,int bookId) {
         this.bookList.add(bookList);
         this.bookId.add(bookId);
+        this.issuedBookDate.add(LocalDate.now().toString());
+        this.returnBookDate.add(LocalDate.now().plusDays(30).toString());
     }
 
     public void setName(String name){
@@ -53,4 +63,5 @@ public class Members {
    public String getEmail(){
        return emailId;
    }
+
 }

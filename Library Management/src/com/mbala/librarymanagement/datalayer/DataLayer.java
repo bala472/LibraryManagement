@@ -70,7 +70,7 @@ public class DataLayer {
         }
         bookList.add(book);
        new File("booklist.json").delete();
-        setBookListJson(bookList);
+        setBookListJson();
         return true;
     }
 
@@ -82,7 +82,7 @@ public class DataLayer {
         }
         memberList.add(members);
         new File("memberlist.json").delete();
-        setMemberListJson(memberList);
+        setMemberListJson();
         return true;
     }
 
@@ -95,7 +95,7 @@ public class DataLayer {
             if (members.getId() == id) {
                 memberList.remove(members);
                 new File("memberlist.json").delete();
-                setMemberListJson(memberList);
+                setMemberListJson();
                 break;
             }
         }
@@ -107,7 +107,7 @@ public class DataLayer {
     ObjectMapper mapper = new ObjectMapper();
 
 
-    public void setBookListJson(List<Book> bookList) {
+    public void setBookListJson() {
         try {
             mapper.writeValue(  new File("booklist.json"), bookList);
         } catch (IOException e) {
@@ -130,7 +130,7 @@ public class DataLayer {
             }  
         }
             }
-    public void setMemberListJson(List<Members> memberList)  {
+    public void setMemberListJson()  {
         try {
             mapper.writeValue(new File("memberlist.json"), memberList);
         } catch (IOException e) {
@@ -157,9 +157,9 @@ public class DataLayer {
         
     }
 
-   public void setLibraryJson(Library library){
+   public void setLibraryJson(){
         try {
-            mapper.writeValue(new File("library.json"), library);
+            mapper.writeValue(new File("library.json"), librarySetup);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -182,7 +182,7 @@ public class DataLayer {
         }
     }
 
-    public void setBorrowBookListJson(List<BorrowReturnBook> borrowBook){
+    public void setBorrowBookListJson(){
         try {
             mapper.writeValue(new File("borrowBooklist.json"), borrowBook);
         } catch (IOException e) {

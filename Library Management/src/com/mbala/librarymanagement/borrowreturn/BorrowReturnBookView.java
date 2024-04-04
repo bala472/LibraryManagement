@@ -14,10 +14,10 @@ public class BorrowReturnBookView {
        Scanner in = new Scanner(System.in);
        BorrowReturnBook borrowReturnBook = new BorrowReturnBook();
        System.out.println("Enter User ID : ");
-       borrowReturnBook.setUserId(in.nextInt());
+       int userId = in.nextInt();
        System.out.println("Enter Book ID : ");
-       borrowReturnBook.setBookId(in.nextInt());
-       borrowReturnModel.validateUserBook(borrowReturnBook);
+       int bookId = in.nextInt();
+       borrowReturnModel.validateUserBook(userId,bookId);
    }
    public void showAlert(int flag){
         if(flag==0){
@@ -30,6 +30,8 @@ public class BorrowReturnBookView {
         }
         if(flag==3)
         System.out.println("User already taken 3 books.Please return books to continue");
+        if(flag==4)
+            System.out.println("Book Currently not available");
         doYouWantContinue();
    }
    public void doYouWantContinue(){
@@ -64,10 +66,12 @@ public class BorrowReturnBookView {
         if(flag==0) {
             System.out.println("\nInvalid User Id ");
         }
-        if(flag==1)
+        if(flag==1) {
             System.out.println("\nInvalid Book Id ");
-        if(flag==2)
+        }
+        if(flag==2){
             System.out.println("\nBook returned successfully ");
+        }
         doYouWantContinueReturn();
     }
     public void doYouWantContinueReturn(){

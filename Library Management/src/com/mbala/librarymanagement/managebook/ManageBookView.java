@@ -97,8 +97,8 @@ public class ManageBookView {
     }
 
     public void showSearchedBooks(String name, int id, String author, String publication, String journal, int edition, int volume, int count) {
-        System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s %-15s %-15s\n", "Book Name", "Book Id", "Author", "Publication", "Journal", "Edition", "Volume", "Count");
-        System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s %-15s %-15s\n", name, id, author, publication, journal, Integer.toString(edition), Integer.toString(volume), count);
+        System.out.printf("%-30s %-10s %-18s %-20s %-20s %-8s %-7s %-6s\n", "Book Name", "Book Id", "Author", "Publication", "Journal", "Edition", "Volume", "Count");
+        System.out.printf("%-30s %-10s %-18s %-20s %-20s %-8s %-7s %-6s\n", name, id, author, publication, journal, Integer.toString(edition), Integer.toString(volume), count);
         mainMenu();
     }
 
@@ -112,9 +112,9 @@ public class ManageBookView {
     }
 
     public void showBook(List<Book> bookList) {
-        System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s %-15s %-15s\n", "Book Name", "Book Id", "Author", "Publication", "Journal", "Edition", "Volume", "Count");
+        System.out.printf("%-30s %-10s %-18s %-20s %-20s %-8s %-7s %-6s\n", "Book Name", "Book Id", "Author", "Publication", "Journal", "Edition", "Volume", "Count");
         for (Book book : bookList) {
-            System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s %-15s %-15s\n", book.getName(), book.getId(), book.getAuthor(), book.getPublication(), book.getJourner(), book.getEdition(), book.getVolume(), book.getAvailableCount());
+            System.out.printf("%-30s %-10s %-18s %-20s %-20s %-8s %-7s %-6s\n", book.getName(), book.getId(), book.getAuthor(), book.getPublication(), book.getJourner(), book.getEdition(), book.getVolume(), book.getAvailableCount());
         }
         mainMenu();
     }

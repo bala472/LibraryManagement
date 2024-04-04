@@ -19,6 +19,6 @@ public class LibrarySetupModel {
     }
     public void addLibraryList(Library library){
         DataLayer.getInstance().setLibrarySetup(library);
-        DataLayer.getInstance().setLibraryJson(library);
+        DataLayer.getInstance().setLibraryJson();
     }
 }
