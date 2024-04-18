@@ -1,11 +1,6 @@
 package com.mbala.librarymanagement.datalayer;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DatabindException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mbala.librarymanagement.model.Book;
 import com.mbala.librarymanagement.model.BorrowReturnBook;
@@ -14,9 +9,7 @@ import com.mbala.librarymanagement.model.Members;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class DataLayer {
@@ -54,9 +47,10 @@ public class DataLayer {
         return bookList;
     }
 
-    public Book searchBookById(int id) {
+    public Book searchBookByName(String name) {
+        String bookName = name.toLowerCase();
         for (Book book : bookList) {
-            if (book.getId() == id) {
+            if (book.getName().toLowerCase().contains(bookName)) {
                 return book;
             }
         }
