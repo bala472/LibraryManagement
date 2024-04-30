@@ -20,7 +20,7 @@ public class ManageBookModel {
         } else {
             manageBookView.showAlreadyAdded();
         }
-        manageBookView.mainMenu();
+        manageBookView.bookMenu();
     }
 
     public void viewBook() {

@@ -44,40 +44,18 @@ public class ManageBookView {
 
     public void mainMenu() {
         Scanner in = new Scanner(System.in);
-        System.out.println("\nClick 1 -----> Add Books" +
-                "\nClick 2 -----> View Books" +
-                "\nClick 3 -----> Search Books\n" +
-                "Click 4 -----> Add Members" +
-                "\nClick 5 -----> View Members\n" +
-                "Click 6 -----> Remove Members\n" +
-                "Click 7 -----> Borrow Books");
-        System.out.println("Click 8 -----> Return Books");
-        System.out.println("Click 9 -----> Logout Session");
-        System.out.println("Enter 10 -----> Update Book Details");
+        System.out.println("Enter 1 ---> Book Management ");
+        System.out.println("Enter 2 ---> Member Management");
+        System.out.println("Enter 3 ---> Manage Borrowed & Returned Books");
+        System.out.println("Enter 4 ---> Logout Session");
         int nextStep = in.nextInt();
-        if (nextStep == 1) {
-            manageBookModel.bookSetup(init());
-        } else if (nextStep == 2) {
-            manageBookModel.viewBook();
-        } else if (nextStep == 3) {
-            System.out.println("Enter Book Name to search : ");
-           // Scanner sc = new Scanner(System.in);
-           in.nextLine();
-            manageBookModel.searchBook(in.nextLine());
+        if(nextStep==1){
+            bookMenu();
+        } else if (nextStep==2) {
+            memberMenu();
+        } else if (nextStep==3) {
+            manageBorrowReturnBookMenu();
         } else if (nextStep == 4) {
-            memberView.addMember();
-            mainMenu();
-        } else if (nextStep == 5) {
-            memberView.showMembers();
-            mainMenu();
-        } else if (nextStep == 6) {
-            memberView.removeMember();
-            mainMenu();
-        } else if (nextStep == 7) {
-            borrowReturnBookView.borrowBook();
-        } else if (nextStep == 8) {
-            borrowReturnBookView.returnBook();
-        } else if (nextStep == 9) {
             System.out.println("Logged out successfully\n\n");
             if (loginView == null) {
                 loginView = new LoginView();
@@ -85,19 +63,82 @@ public class ManageBookView {
             } else {
                 loginView.init();
             }
-        } else if(nextStep == 10){
-           manageBookModel.updateBook(init());
-        }
-        else {
+        }else{
             System.out.println("Please enter valid input");
             mainMenu();
+        }
+    }
+    public void bookMenu(){
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter 1 ---> Add Books");
+        System.out.println("Enter 2 ---> View Books");
+        System.out.println("Enter 3 ---> Search Books");
+        System.out.println("Enter 4 ---> Update Book Details");
+        System.out.println("Enter 5 ---> Exit Menu");
+        int menu = in.nextInt();
+        if (menu == 1) {
+            manageBookModel.bookSetup(init());
+        } else if (menu == 2) {
+            manageBookModel.viewBook();
+        } else if (menu == 3) {
+            System.out.println("Enter Book Name to search : ");
+            in.nextLine();
+            manageBookModel.searchBook(in.nextLine());
+        }else if(menu ==4){
+            manageBookModel.updateBook(init());
+        }
+        else if (menu == 5) {
+            mainMenu();
+        }else {
+            System.out.println("Please enter valid number in the menu");
+            bookMenu();
+        }
+    }
+    public void memberMenu(){
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter 1 ---> Add Members");
+        System.out.println("Enter 2 ---> View Members");
+        System.out.println("Enter 3 ---> Remove Members");
+        System.out.println("Enter 4 ---> Exit Menu");
+        int menu = in.nextInt();
+        if(menu==1){
+            memberView.addMember();
+            memberMenu();
+        }else if (menu == 2) {
+            memberView.showMembers();
+            memberMenu();
+        } else if (menu == 3) {
+            memberView.removeMember();
+            memberMenu();
+        } else if (menu==4) {
+            mainMenu();
+        }else {
+            System.out.println("Please enter valid number in the menu");
+            memberMenu();
+        }
+    }
+    public void manageBorrowReturnBookMenu(){
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter 1 ---> Borrow Books");
+        System.out.println("Enter 2 ---> Return Books");
+        System.out.println("Enter 3 ---> Exit Menu");
+        int menu = in.nextInt();
+        if (menu == 1) {
+            borrowReturnBookView.borrowBook();
+        } else if (menu == 2) {
+            borrowReturnBookView.returnBook();
+        } else if (menu == 3) {
+            mainMenu();
+        }else {
+            System.out.println("Please enter valid input");
+            manageBorrowReturnBookMenu();
         }
     }
 
     public void showSearchedBooks(Book book) {
         System.out.printf("%-30s %-10s %-18s %-20s %-20s %-8s %-7s %-6s\n", "Book Name", "Book Id", "Author", "Publication", "Journal", "Edition", "Volume", "Count");
         System.out.printf("%-30s %-10s %-18s %-20s %-20s %-8s %-7s %-6s\n", book.getName(), book.getId(), book.getAuthor(), book.getPublication(), book.getJourner(), Integer.toString(book.getEdition()), Integer.toString(book.getVolume()), book.getAvailableCount());
-        mainMenu();
+        bookMenu();
     }
 
 
@@ -112,10 +153,10 @@ public class ManageBookView {
     public void showUpdateStatus(int status){
         if(status == 1){
             System.out.println("Book Updated Sucessfully ");
-            mainMenu();
+            bookMenu();
         }
         System.out.println("Book Not Found ");
-        mainMenu();
+        bookMenu();
     }
 
     public void showBook(List<Book> bookList) {
@@ -123,7 +164,7 @@ public class ManageBookView {
         for (Book book : bookList) {
             System.out.printf("%-30s %-10s %-18s %-20s %-20s %-8s %-7s %-6s\n", book.getName(), book.getId(), book.getAuthor(), book.getPublication(), book.getJourner(), book.getEdition(), book.getVolume(), book.getAvailableCount());
         }
-        mainMenu();
+        bookMenu();
     }
 
 }
