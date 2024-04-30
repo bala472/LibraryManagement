@@ -61,8 +61,9 @@ public class ManageBookView {
             manageBookModel.viewBook();
         } else if (nextStep == 3) {
             System.out.println("Enter Book Name to search : ");
-            Scanner sc = new Scanner(System.in);
-            manageBookModel.searchBook(sc.nextLine());
+           // Scanner sc = new Scanner(System.in);
+           in.nextLine();
+            manageBookModel.searchBook(in.nextLine());
         } else if (nextStep == 4) {
             memberView.addMember();
             mainMenu();

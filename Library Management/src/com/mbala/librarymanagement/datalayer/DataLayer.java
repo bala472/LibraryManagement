@@ -58,7 +58,7 @@ public class DataLayer {
     }
     public boolean isNewBook(Book book) {
         for (Book check : bookList) {
-            if (check.getName().equals(book.getName()) && check.getVolume() == book.getVolume()) {
+            if (check.getName().equals(book.getName()) && check.getId() == book.getId()) {
                 return false;
             }
         }

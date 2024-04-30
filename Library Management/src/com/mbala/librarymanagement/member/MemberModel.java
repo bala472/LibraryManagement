@@ -8,7 +8,6 @@ public class MemberModel {
     }
     public void addMemberList(Members members){
       if(DataLayer.getInstance().isNewMember(members)){
-          DataLayer.getInstance().isNewMember(members);
           memberView.onSucess();
       }else {
           memberView.alreadyExsists();

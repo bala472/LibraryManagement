@@ -1,5 +1,7 @@
 package com.mbala.librarymanagement.managebook;
 
+import java.io.File;
+
 import com.mbala.librarymanagement.datalayer.DataLayer;
 import com.mbala.librarymanagement.model.Book;
 
@@ -27,6 +29,9 @@ public class ManageBookModel {
 
     public void searchBook(String name) {
         Book bookNameList = DataLayer.getInstance().searchBookByName(name);
+        if(bookNameList==null){
+            manageBookView.showUpdateStatus(0);
+        }
         manageBookView.showSearchedBooks(bookNameList);
     }
     public void updateBook(Book updateBook){
@@ -40,6 +45,8 @@ public class ManageBookModel {
                 book.setPublication(updateBook.getPublication());
                 book.setJourner(updateBook.getJourner());
                 manageBookView.showUpdateStatus(1);
+                new File("booklist.json").delete();
+                DataLayer.getInstance().setBookListJson();
                 return;
             }
         }
