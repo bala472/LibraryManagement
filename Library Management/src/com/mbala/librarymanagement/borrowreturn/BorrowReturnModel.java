@@ -17,44 +17,6 @@ public class BorrowReturnModel {
         this.borrowReturnBookView = borrowReturnBookView;
     }
 
-   /* public void validateUserBook(int userId,int bookId) {
-
-        int flag = 0;
-        for (Members member : DataLayer.getInstance().getMemberList()) {
-            if (member.getId() == borrowReturnBook.getUserId()) {
-                flag = 1;
-                for (Book book : DataLayer.getInstance().getBookList()) {
-                    if (book.getId() == borrowReturnBook.getBookId() && book.getAvailableCount() != 0) {
-                        flag = 2;
-                       // book.setAvailableCount((book.getAvailableCount()) - 1);
-                        if(member.getBookList().size()<=3){
-                            book.setAvailableCount((book.getAvailableCount()) - 1);
-                            member.setBookList(book.getName(),book.getId());
-                            DataLayer.getInstance().setBorrowBook(borrowReturnBook);
-                            new File("borrowBook.json").delete();
-                            new File("book.json").delete();
-                            new File("member.json").delete();
-                            DataLayer.getInstance().setBorrowBookListJson(DataLayer.getInstance().getBorrowBookList());
-                            DataLayer.getInstance().setBookListJson(DataLayer.getInstance().getBookList());
-                            DataLayer.getInstance().setMemberListJson(DataLayer.getInstance().getMemberList());
-
-                        }
-                        else{
-                            flag=3;
-                        }
-                    }
-                }
-            }
-        }
-        if (flag == 0)
-            borrowReturnBookView.showAlert(0);
-        if (flag == 1)
-            borrowReturnBookView.showAlert(1);
-        if (flag == 2)
-            borrowReturnBookView.showAlert(2);
-        if (flag ==3)
-            borrowReturnBookView.showAlert(3);
-    }*/
    public void validateUserBook(int userId,int bookId){
        for(Members members : DataLayer.getInstance().getMemberList()){
            if(members.getId()==userId){
@@ -94,6 +56,7 @@ public class BorrowReturnModel {
 
 
     public  void validateReturnBook(int userId,int bookId){
+       // System.out.println("Entered validatereturn");
         for(Members members: DataLayer.getInstance().getMemberList()){
             if(members.getId()==userId){
                 if(members.getBookid().isEmpty()){
@@ -106,7 +69,8 @@ public class BorrowReturnModel {
         borrowReturnBookView.showAlertReturn(0);
     }
     public void removeBookFromUSerList(Members members,int bookid){
-        for(int i=0;i<3;i++){
+       // System.out.println("Enterred removeBookfromuserlist");
+        for(int i=0;i<members.getBookid().size();i++){
             if(members.getBookid().get(i)==bookid){
                 members.getBookid().remove(i);
                 members.getBookList().remove(i);
@@ -115,12 +79,13 @@ public class BorrowReturnModel {
                 new File("member.json").delete();
                 DataLayer.getInstance().setMemberListJson();
                 addBookCount(bookid);
-                return;
+              //  return;
             }
         }
         borrowReturnBookView.showAlertReturn(1);
     }
     public void addBookCount(int bookId){
+      //  System.out.println("Entered addbookcount");
         for(Book book:DataLayer.getInstance().getBookList()){
             if(book.getId()==bookId){
                 book.setAvailableCount(book.getAvailableCount()+1);
@@ -180,6 +145,45 @@ public class BorrowReturnModel {
             borrowReturnBookView.showAlertReturn(1);
         if (flag == 2)
             borrowReturnBookView.showAlertReturn(2);
+    }*/
+
+     /* public void validateUserBook(int userId,int bookId) {
+
+        int flag = 0;
+        for (Members member : DataLayer.getInstance().getMemberList()) {
+            if (member.getId() == borrowReturnBook.getUserId()) {
+                flag = 1;
+                for (Book book : DataLayer.getInstance().getBookList()) {
+                    if (book.getId() == borrowReturnBook.getBookId() && book.getAvailableCount() != 0) {
+                        flag = 2;
+                       // book.setAvailableCount((book.getAvailableCount()) - 1);
+                        if(member.getBookList().size()<=3){
+                            book.setAvailableCount((book.getAvailableCount()) - 1);
+                            member.setBookList(book.getName(),book.getId());
+                            DataLayer.getInstance().setBorrowBook(borrowReturnBook);
+                            new File("borrowBook.json").delete();
+                            new File("book.json").delete();
+                            new File("member.json").delete();
+                            DataLayer.getInstance().setBorrowBookListJson(DataLayer.getInstance().getBorrowBookList());
+                            DataLayer.getInstance().setBookListJson(DataLayer.getInstance().getBookList());
+                            DataLayer.getInstance().setMemberListJson(DataLayer.getInstance().getMemberList());
+
+                        }
+                        else{
+                            flag=3;
+                        }
+                    }
+                }
+            }
+        }
+        if (flag == 0)
+            borrowReturnBookView.showAlert(0);
+        if (flag == 1)
+            borrowReturnBookView.showAlert(1);
+        if (flag == 2)
+            borrowReturnBookView.showAlert(2);
+        if (flag ==3)
+            borrowReturnBookView.showAlert(3);
     }*/
 
 }

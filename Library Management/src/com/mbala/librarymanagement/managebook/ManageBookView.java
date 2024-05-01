@@ -19,8 +19,9 @@ public class ManageBookView {
     }
 
     public Book init() {
-        Scanner in = new Scanner(System.in);
         Book book = new Book();
+        try{
+        Scanner in = new Scanner(System.in);
         System.out.println("Enter Book Name : ");
         book.setName(in.nextLine());
         System.out.println("Enter id : ");
@@ -39,10 +40,16 @@ public class ManageBookView {
         book.setAvailableCount(in.nextInt());
         System.out.println("Enter volume : ");
         book.setVolume(in.nextInt());
+        }
+        catch(Exception e){
+            System.out.println("\nWarning : Input must be number for the above field\n");
+            init();
+        }
         return book;
     }
 
     public void mainMenu() {
+        try{
         Scanner in = new Scanner(System.in);
         System.out.println("Enter 1 ---> Book Management ");
         System.out.println("Enter 2 ---> Member Management");
@@ -56,7 +63,7 @@ public class ManageBookView {
         } else if (nextStep==3) {
             manageBorrowReturnBookMenu();
         } else if (nextStep == 4) {
-            System.out.println("Logged out successfully\n\n");
+            System.out.println("\n--- Logged out successfully ---\n");
             if (loginView == null) {
                 loginView = new LoginView();
                 loginView.init();
@@ -64,11 +71,16 @@ public class ManageBookView {
                 loginView.init();
             }
         }else{
-            System.out.println("Please enter valid input");
+            System.out.println("\nPlease enter valid input\n");
+            mainMenu();
+        }
+        }catch(Exception e){
+            System.out.println("\nInput must be number\n");
             mainMenu();
         }
     }
     public void bookMenu(){
+        try{
         Scanner in = new Scanner(System.in);
         System.out.println("Enter 1 ---> Add Books");
         System.out.println("Enter 2 ---> View Books");
@@ -90,11 +102,16 @@ public class ManageBookView {
         else if (menu == 5) {
             mainMenu();
         }else {
-            System.out.println("Please enter valid number in the menu");
+            System.out.println("\nPlease enter valid number in the menu\n");
             bookMenu();
         }
+    }catch(Exception e){
+        System.out.println("\nInput must be number\n");
+        bookMenu();
+    }
     }
     public void memberMenu(){
+        try{
         Scanner in = new Scanner(System.in);
         System.out.println("Enter 1 ---> Add Members");
         System.out.println("Enter 2 ---> View Members");
@@ -113,11 +130,16 @@ public class ManageBookView {
         } else if (menu==4) {
             mainMenu();
         }else {
-            System.out.println("Please enter valid number in the menu");
+            System.out.println("\nPlease enter valid number in the menu\n");
             memberMenu();
         }
+    }catch(Exception e){
+        System.out.println("\nInput must be number\n");
+        memberMenu();
+    }
     }
     public void manageBorrowReturnBookMenu(){
+        try{
         Scanner in = new Scanner(System.in);
         System.out.println("Enter 1 ---> Borrow Books");
         System.out.println("Enter 2 ---> Return Books");
@@ -130,9 +152,13 @@ public class ManageBookView {
         } else if (menu == 3) {
             mainMenu();
         }else {
-            System.out.println("Please enter valid input");
+            System.out.println("\nPlease enter valid input\n");
             manageBorrowReturnBookMenu();
         }
+    }catch(Exception e){
+        System.out.println("\nInput must be number\n");
+        manageBorrowReturnBookMenu();
+    }
     }
 
     public void showSearchedBooks(Book book) {
@@ -143,19 +169,19 @@ public class ManageBookView {
 
 
     public void showSucess() {
-        System.out.println("Book added successfully");
+        System.out.println("\nBook added successfully !!!\n");
     }
 
     public void showAlreadyAdded() {
-        System.out.println("Book already added");
+        System.out.println("\nBook already added\n");
     }
 
     public void showUpdateStatus(int status){
         if(status == 1){
-            System.out.println("Book Updated Sucessfully ");
+            System.out.println("\nBook Updated Sucessfully\n");
             bookMenu();
         }
-        System.out.println("Book Not Found ");
+        System.out.println("\nBook Not Found\n");
         bookMenu();
     }
 

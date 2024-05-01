@@ -24,9 +24,9 @@ public class LoginView {
     }
 
     public void onSuccess() {
-        System.out.println("\n--- Login successful ---\n");
-        System.out.println ("\n ---- welcome to " + LibraryManagement.getInstance().getAppName()
-                + " (" + LibraryManagement.getInstance().getAppVersion() + ") ---- ");
+        System.out.println("\n--- Login successful ---");
+        System.out.println ("\n---- welcome to " + LibraryManagement.getInstance().getAppName()
+                + " (" + LibraryManagement.getInstance().getAppVersion() + ") ----");
         LibrarySetupView librarySetupView = new LibrarySetupView();
         librarySetupView.init();
     }

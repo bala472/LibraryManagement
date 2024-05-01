@@ -13,6 +13,7 @@ public class MemberView {
     }
 
     public void addMember() {
+        try{
         Members members = new Members();
         Scanner in = new Scanner(System.in);
         System.out.println("Enter Member's Name : ");
@@ -27,6 +28,10 @@ public class MemberView {
         System.out.println("Enter address : ");
         members.setAddress(in.nextLine());
         memberModel.addMemberList(members);
+        }catch(Exception e){
+            System.out.println("Member id must be number");
+            addMember();
+        }
     }
 
     public void onSucess() {
@@ -45,9 +50,15 @@ public class MemberView {
     }
 
     public void removeMember() {
-        Scanner in = new Scanner(System.in);
-        System.out.println("Enter member id ");
-        memberModel.removeMember(in.nextInt());
+        try{
+            Scanner in = new Scanner(System.in);
+            System.out.println("Enter member id ");
+            memberModel.removeMember(in.nextInt());
+        }catch(Exception e){
+            System.out.println("Member id must be number");
+            removeMember();
+        }
+       
     }
 
     public void onSucessRemove() {

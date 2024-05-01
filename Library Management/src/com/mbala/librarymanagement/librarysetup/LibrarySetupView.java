@@ -15,7 +15,7 @@ public class LibrarySetupView {
     }
     public void initiateSetup() {
         this.library=new Library();
-        System.out.println("\nPlease Fill Library Details From Here.\n\n");
+        System.out.println("\nPlease Fill Library Details From Here.\n");
         Scanner in = new Scanner(System.in);
         System.out.println("Enter Library Name : ");
         library.setLibraryName(in.nextLine());
